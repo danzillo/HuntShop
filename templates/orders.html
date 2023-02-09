@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+</head>
+<body>
+
+<h1>Список всех заказов:</h1>
+<table>
+    <tr>
+        <th>Номер заказа</th>
+        <th>Продукт</th>
+        <th>Дата заказа</th>
+        <th>Покупатель</th>
+    </tr>
+    {% for order in list_of_all_orders %}
+    <tr>
+        <td>{{ order.order_id }}</td>
+        <td>{{ order.product }}</td>
+        <td>{{ order.order_date }}</td>
+        <td>{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h2>Поиск:</h2>
+<form action="{% url 'search' %}" method="GET">
+    {% csrf_token %}
+    <input name="q" type="text" placeholder="Введите имя или фамилию...">
+</form>
+</body>
+</html>
